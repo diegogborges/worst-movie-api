@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Setup {
@@ -16,6 +18,8 @@ public class Setup {
         String csvFile = "Movielist.csv";
 
         try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
+
+            List<Movie> movieList = new ArrayList<>();
             String line;
             boolean isHeader = true;
             while ((line = bufferedReader.readLine()) != null) {
@@ -25,7 +29,17 @@ public class Setup {
                 }
 
                 String[] arrModel = line.split(";");
-                System.out.println(arrModel);
+
+                movieList.add(
+                        Movie.builder()
+                                .id(null)
+                                .movieYear(Integer.parseInt(arrModel[0]))
+                                .title(arrModel[1])
+                                .studios(arrModel[2])
+                                .producers(arrModel[3])
+                                .winner(arrModel.length >= 5 && arrModel[4].equals("yes"))
+                                .build()
+                );
             }
 
         } catch (IOException exception) {

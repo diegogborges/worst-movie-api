@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: worst-movie-api
+
+  h2:
+    console:
+      enabled: false
+
+  datasource:
+    url: jdbc:h2:mem:goldenraspberryawards
+    driverClassName: org.h2.Driver
+    username: ${H2_USER:user}
+    password: ${H2_PASSWORD:pass}
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
