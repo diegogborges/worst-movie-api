@@ -1,6 +1,6 @@
 package br.com.goldenraspberryawards.repository;
 
-import br.com.goldenraspberryawards.Movie;
+import br.com.goldenraspberryawards.domain.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

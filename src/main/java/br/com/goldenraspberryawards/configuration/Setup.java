@@ -1,5 +1,6 @@
-package br.com.goldenraspberryawards;
+package br.com.goldenraspberryawards.configuration;
 
+import br.com.goldenraspberryawards.domain.Movie;
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,8 @@ import java.util.List;
 @Component
 public class Setup {
 
+    private String csvFile = "Movielist.csv";
+
     private final WorstMovieRepository movieRepository;
 
     public Setup(WorstMovieRepository movieRepository) {
@@ -21,9 +24,6 @@ public class Setup {
 
     @PostConstruct
     private void setupData() throws IOException {
-
-        final String csvFile = "Movielist.csv";
-
         try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
             List<Movie> movieList = new ArrayList<>();
             String line;

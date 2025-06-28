@@ -1,4 +1,4 @@
-package br.com.goldenraspberryawards.view;
+package br.com.goldenraspberryawards.api.v1.controller.view;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

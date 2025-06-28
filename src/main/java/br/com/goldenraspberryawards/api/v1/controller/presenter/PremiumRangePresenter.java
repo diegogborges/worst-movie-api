@@ -1,7 +1,7 @@
-package br.com.goldenraspberryawards.presenter;
+package br.com.goldenraspberryawards.api.v1.controller.presenter;
 
-import br.com.goldenraspberryawards.Movie;
-import br.com.goldenraspberryawards.view.PremiumRangeView;
+import br.com.goldenraspberryawards.domain.Movie;
+import br.com.goldenraspberryawards.api.v1.controller.view.PremiumRangeView;
 import br.com.goldenraspberryawards.util.MaxMovieIntervalComparator;
 import br.com.goldenraspberryawards.util.MinMovieIntervalComparator;
 import org.springframework.stereotype.Component;

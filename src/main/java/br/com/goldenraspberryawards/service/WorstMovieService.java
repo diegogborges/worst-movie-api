@@ -1,10 +1,10 @@
 package br.com.goldenraspberryawards.service;
 
-import br.com.goldenraspberryawards.Movie;
-import br.com.goldenraspberryawards.view.PremiumMinMaxWinnerView;
+import br.com.goldenraspberryawards.domain.Movie;
+import br.com.goldenraspberryawards.api.v1.controller.view.PremiumMinMaxWinnerView;
 import br.com.goldenraspberryawards.exception.MaxAwardsIntervalNotFound;
 import br.com.goldenraspberryawards.exception.MinAwardsIntervalNotFound;
-import br.com.goldenraspberryawards.presenter.PremiumRangePresenter;
+import br.com.goldenraspberryawards.api.v1.controller.presenter.PremiumRangePresenter;
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import br.com.goldenraspberryawards.util.MaxMovieIntervalComparator;
 import br.com.goldenraspberryawards.util.MinMovieIntervalComparator;

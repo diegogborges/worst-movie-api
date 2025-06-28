@@ -1,6 +1,6 @@
 package br.com.goldenraspberryawards.util;
 
-import br.com.goldenraspberryawards.Movie;
+import br.com.goldenraspberryawards.domain.Movie;
 
 import java.util.Comparator;
 import java.util.List;

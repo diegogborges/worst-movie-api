@@ -1,4 +1,4 @@
-package br.com.goldenraspberryawards;
+package br.com.goldenraspberryawards.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
