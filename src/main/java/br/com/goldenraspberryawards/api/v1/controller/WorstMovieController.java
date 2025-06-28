@@ -1,10 +1,8 @@
 package br.com.goldenraspberryawards.api.v1.controller;
 
-import br.com.goldenraspberryawards.Movie;
+import br.com.goldenraspberryawards.view.PremiumMinMaxWinnerView;
 import br.com.goldenraspberryawards.service.WorstMovieService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("v1/worst-movie")
@@ -17,7 +15,7 @@ public class WorstMovieController {
     }
 
     @GetMapping
-    public List<Movie> findAll() {
-        return worstMovieService.findAll();
+    public PremiumMinMaxWinnerView premiumMinMaxWinner() {
+        return worstMovieService.premiumMinMaxWinner();
     }
 }

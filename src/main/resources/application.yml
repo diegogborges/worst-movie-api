@@ -1,6 +1,15 @@
+server:
+  port: 8080
+
+  servlet:
+    context-path: /awards
+
 spring:
   application:
     name: worst-movie-api
+
+  context:
+    path: awards
 
   h2:
     console:

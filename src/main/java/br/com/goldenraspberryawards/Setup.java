@@ -49,7 +49,6 @@ public class Setup {
             }
 
             this.movieRepository.saveAll(movieList);
-
         } catch (
                 IOException exception) {
             System.out.println(exception);
