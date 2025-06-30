@@ -24,7 +24,7 @@ public class Setup {
 
     @PostConstruct
     private void setupData() throws IOException {
-        final String csvFile = "Movielist.csv";
+        final String csvFile = "static/Movielist.csv";
         final Resource resource = resourceLoader.getResource("classpath:" + csvFile);
         final InputStream inputStream = resource.getInputStream();
 

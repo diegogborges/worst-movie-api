@@ -92,7 +92,8 @@ GET awards/v1/intervals
 
 ## CSV Input File
 
-The CSV file containing the movie data should be placed in the `resources` folder with name Movielist.csv and is loaded automatically on startup.
+The CSV file containing the movie data should be placed in the `resources/static` folder with name Movielist.csv.
+The CSV file is loaded automatically on startup.
 
 ---
 

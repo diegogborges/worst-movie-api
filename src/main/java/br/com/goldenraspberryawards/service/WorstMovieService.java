@@ -1,9 +1,8 @@
 package br.com.goldenraspberryawards.service;
 
+import br.com.goldenraspberryawards.api.v1.controller.view.PremiumRangeView;
 import br.com.goldenraspberryawards.domain.Movie;
 import br.com.goldenraspberryawards.api.v1.controller.view.PremiumMinMaxWinnerView;
-import br.com.goldenraspberryawards.exception.MaxAwardsIntervalNotFound;
-import br.com.goldenraspberryawards.exception.MinAwardsIntervalNotFound;
 import br.com.goldenraspberryawards.api.v1.controller.presenter.PremiumRangePresenter;
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import br.com.goldenraspberryawards.util.MaxMovieIntervalComparator;
@@ -18,28 +17,29 @@ import java.util.stream.Collectors;
 @Service
 public class WorstMovieService {
 
-    private final PremiumRangePresenter premiumRangePresenter;
     private final WorstMovieRepository worstMovieRepository;
 
     public PremiumMinMaxWinnerView premiumMinMaxWinner() {
         final List<Movie> onlyWinners = worstMovieRepository.getOnlyWinners();
-
-        final var resultMin = getMinRangedWinnerProducerHandler(onlyWinners);
-        final var resultMax = getMaxRangedWinnerProducerHandler(onlyWinners);
-
-        final var viewMin = resultMin.stream()
-                .map(premiumRangePresenter::presentMin)
-                .flatMap(Collection::stream)
-                .toList();
-
-        final var viewMax = resultMax.stream()
-                .map(premiumRangePresenter::presentMax)
-                .flatMap(Collection::stream)
-                .toList();
-
         return new PremiumMinMaxWinnerView()
-                .withMin(viewMin)
-                .withMax(viewMax);
+                .withMin(getViewMin(onlyWinners))
+                .withMax(getViewMax(onlyWinners));
+    }
+
+    private List<PremiumRangeView> getViewMax(List<Movie> onlyWinners) {
+        final var resultMax = getMaxRangedWinnerProducerHandler(onlyWinners);
+        return resultMax.stream()
+                .map(PremiumRangePresenter::presentMax)
+                .flatMap(Collection::stream)
+                .toList();
+    }
+
+    private List<PremiumRangeView> getViewMin(List<Movie> onlyWinners) {
+        final var resultMin = getMinRangedWinnerProducerHandler(onlyWinners);
+        return resultMin.stream()
+                .map(PremiumRangePresenter::presentMin)
+                .flatMap(Collection::stream)
+                .toList();
     }
 
     private SequencedCollection<List<Movie>> getMinRangedWinnerProducerHandler(List<Movie> onlyWinners) {
@@ -53,7 +53,7 @@ public class WorstMovieService {
                 .stream()
                 .map(Map.Entry::getValue)
                 .min(new MinMovieIntervalComparator())
-                .orElseThrow(MinAwardsIntervalNotFound::new);
+                .orElse(List.of());
         final var minInterval = MinMovieIntervalComparator.getMinInterval(producerMinInterval);
 
         return producersMultiplesAwards
@@ -74,7 +74,7 @@ public class WorstMovieService {
                 .stream()
                 .map(Map.Entry::getValue)
                 .max(new MaxMovieIntervalComparator())
-                .orElseThrow(MaxAwardsIntervalNotFound::new);
+                .orElse(List.of());
         final int maxInterval = MaxMovieIntervalComparator.getMaxInterval(producerMaxInterval);
 
         return producersMultiplesAwards
