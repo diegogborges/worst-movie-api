@@ -1,0 +1,34 @@
+version: 2.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/openjdk:21.0.2
+    steps:
+      - checkout
+      - run: ./mvnw test coveralls:report
+      - store_artifacts:
+          path: target
+
+  build:
+    docker:
+      - image: cimg/openjdk:21.0.2
+    steps:
+      - checkout
+      - run: ./mvnw package -Dmaven.test.skip=true
+
+workflows:
+  version: 2
+
+  test-env-vars:
+    jobs:
+      - build:
+          context: env
+
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+            - maverick
