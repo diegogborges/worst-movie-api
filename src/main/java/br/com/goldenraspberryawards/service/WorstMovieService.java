@@ -8,22 +8,18 @@ import br.com.goldenraspberryawards.api.v1.controller.presenter.PremiumRangePres
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import br.com.goldenraspberryawards.util.MaxMovieIntervalComparator;
 import br.com.goldenraspberryawards.util.MinMovieIntervalComparator;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class WorstMovieService {
 
     private final PremiumRangePresenter premiumRangePresenter;
     private final WorstMovieRepository worstMovieRepository;
-
-    public WorstMovieService(WorstMovieRepository worstMovieRepository,
-                             PremiumRangePresenter premiumRangePresenter) {
-        this.worstMovieRepository = worstMovieRepository;
-        this.premiumRangePresenter = premiumRangePresenter;
-    }
 
     public PremiumMinMaxWinnerView premiumMinMaxWinner() {
         final List<Movie> onlyWinners = worstMovieRepository.getOnlyWinners();
@@ -32,13 +28,13 @@ public class WorstMovieService {
         final var resultMax = getMaxRangedWinnerProducerHandler(onlyWinners);
 
         final var viewMin = resultMin.stream()
-                .map(e -> premiumRangePresenter.presentMin(e))
-                .flatMap(e -> e.stream())
+                .map(premiumRangePresenter::presentMin)
+                .flatMap(Collection::stream)
                 .toList();
 
         final var viewMax = resultMax.stream()
-                .map(e -> premiumRangePresenter.presentMax(e))
-                .flatMap(e -> e.stream())
+                .map(premiumRangePresenter::presentMax)
+                .flatMap(Collection::stream)
                 .toList();
 
         return new PremiumMinMaxWinnerView()

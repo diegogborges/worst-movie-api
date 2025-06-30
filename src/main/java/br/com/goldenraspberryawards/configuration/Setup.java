@@ -3,28 +3,32 @@ package br.com.goldenraspberryawards.configuration;
 import br.com.goldenraspberryawards.domain.Movie;
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Component
 public class Setup {
 
-    private String csvFile = "Movielist.csv";
-
+    private final ResourceLoader resourceLoader;
     private final WorstMovieRepository movieRepository;
-
-    public Setup(WorstMovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
 
     @PostConstruct
     private void setupData() throws IOException {
-        try (final BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFile))) {
+        final String csvFile = "Movielist.csv";
+        final Resource resource = resourceLoader.getResource("classpath:" + csvFile);
+        final InputStream inputStream = resource.getInputStream();
+
+        try (final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             List<Movie> movieList = new ArrayList<>();
             String line;
             boolean isHeader = true;

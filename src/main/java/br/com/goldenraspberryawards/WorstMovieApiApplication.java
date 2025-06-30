@@ -9,5 +9,4 @@ public class WorstMovieApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WorstMovieApiApplication.class, args);
 	}
-
 }

@@ -8,9 +8,6 @@ spring:
   application:
     name: worst-movie-api
 
-  context:
-    path: awards
-
   h2:
     console:
       enabled: false

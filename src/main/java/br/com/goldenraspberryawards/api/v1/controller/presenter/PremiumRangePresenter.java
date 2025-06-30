@@ -50,10 +50,10 @@ public class PremiumRangePresenter {
     }
 
     private List<Movie> filterMinIntervalMovies(List<Movie> movies, int interval){
-        Movie last = movies.get(0);
+        Movie last = movies.getFirst();
         List<Movie> rangedList = new ArrayList<>();
         for (Movie movie: movies) {
-            var  a = (int)(movie.getMovieYear() - last.getMovieYear());
+            var  a = movie.getMovieYear() - last.getMovieYear();
             if(a == interval) {
                 rangedList.add(last);
                 rangedList.add(movie);
@@ -64,10 +64,10 @@ public class PremiumRangePresenter {
     }
 
     private List<Movie> filterMaxIntervalMovies(List<Movie> movies, int interval){
-        Movie last = movies.get(0);
+        Movie last = movies.getFirst();
         List<Movie> rangedList = new ArrayList<>();
         for (Movie movie: movies) {
-            var  a = (int)(movie.getMovieYear() - last.getMovieYear());
+            var  a = movie.getMovieYear() - last.getMovieYear();
             if(a == interval) {
                 rangedList.add(last);
                 rangedList.add(movie);
