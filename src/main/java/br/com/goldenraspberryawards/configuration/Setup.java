@@ -4,6 +4,8 @@ import br.com.goldenraspberryawards.domain.Movie;
 import br.com.goldenraspberryawards.repository.WorstMovieRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,7 @@ import java.util.List;
 @Component
 public class Setup {
 
+    private static final Logger logger = LogManager.getLogger(Setup.class);
     private final ResourceLoader resourceLoader;
     private final WorstMovieRepository movieRepository;
 
@@ -32,6 +35,7 @@ public class Setup {
             List<Movie> movieList = new ArrayList<>();
             String line;
             boolean isHeader = true;
+            logger.info("File loaded and read file");
             while ((line = bufferedReader.readLine()) != null) {
                 if (isHeader) {
                     isHeader = false;
@@ -52,10 +56,10 @@ public class Setup {
                 );
             }
 
+            logger.info("Saving the movies");
             this.movieRepository.saveAll(movieList);
-        } catch (
-                IOException exception) {
-            System.out.println(exception);
+        } catch (IOException exception) {
+            logger.error("Error to load and read file: {}", String.valueOf(exception));
         }
     }
 }
