@@ -1,33 +1,19 @@
-version: 2.0
+version: 2.1
 
 jobs:
-  test:
+  build-and-test:
     docker:
       - image: cimg/openjdk:21.0.2
     steps:
       - checkout
-      - run: ./mvnw test coveralls:report
-      - store_artifacts:
-          path: target
-
-  build:
-    docker:
-      - image: cimg/openjdk:21.0.2
-    steps:
-      - checkout
-      - run: ./mvnw package -Dmaven.test.skip=true
+      - run:
+        name: Build
+        command: mvn -B -DskipTests clean package
+      - run:
+        name: Test
+        command: mvn test
 
 workflows:
-  version: 2
-
-  test-env-vars:
-    jobs:
-      - build:
-          context: env
-
   build-and-test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - build-and-test
