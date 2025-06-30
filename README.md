@@ -6,6 +6,13 @@ It reads movie data from a CSV file at application startup and stores it in an i
 
 ---
 
+<div align="center">
+
+[![CircleCI](https://circleci.com/gh/diegogborges/worst-movie-api/tree/main.svg?style=svg)](https://circleci.com/gh/diegogborges/worst-movie-api/tree/main)
+[![Coverage Status](https://coveralls.io/repos/github/diegogborges/worst-movie-api/badge.svg?branch=main)](https://coveralls.io/github/diegogborges/worst-movie-api?branch=main)
+
+</div>
+
 ## Features
 
 - Reads and imports CSV data into an embedded H2 database automatically at startup.
