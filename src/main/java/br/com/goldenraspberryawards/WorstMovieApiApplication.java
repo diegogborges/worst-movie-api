@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WorstMovieApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WorstMovieApiApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(WorstMovieApiApplication.class, args);
+  }
 }

@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Movie {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-    private Integer movieYear;
-    private String title;
-    private String studios;
-    private String producers;
-    private Boolean winner;
+  @Id
+  @GeneratedValue
+  private Long id;
+  private Integer movieYear;
+  private String title;
+  private String studios;
+  private String producers;
+  private Boolean winner;
 }
